@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Activity 1: DOM manipulation</title>
+  </head>
+  <body>
+    <h1>Activity 1: DOM manipulation</h1>
+    <p>On this activity we will show the data in the variable employees in this html as a table, build all the elements with js functions</p>
+    <div id="table-container">
+     <table></table>
+    </div>
+    <script>
+     let employees = [{"id":1,"name":"MIRIAM CASTIÑEIRA BREA","department":"IT"},{"id":2,"name":"GONZALO MULET FIGUERAS","department":"IT"},{"id":3,"name":"FRANCISCO JOSE GRAÑA BARBERA","department":"IT"},{"id":4,"name":"IRENE POMBO JORDA","department":"HR"}]
+    function generarThead(table, data) {
+      let thead = table.createTHead();// Nos genera el thead dentro de la tag <table>
+      let row = thead.insertRow();// nos crea las filas dentro del thead
+      for (let key of data) {
+       let th = document.createElement("th"); //al iterar el bucle nos va creando las posiciones y añadiendo a la cabecera el id, name y department. Todo esto creado en las variables de abajo
+       let text = document.createTextNode(key);
+       th.appendChild(text);
+       row.appendChild(th);
+     }
+    }
+    function generarTabla(table, data) {//Nos genera el reto de la tabla y al recorrer el array nos va insertando los datos en su correspondiente fila y columna
+      for (let elemento of data) {
+    let row = table.insertRow();
+    for (key in elemento) {
+      let cell = row.insertCell();
+      let text = document.createTextNode(elemento[key]);
+      cell.appendChild(text);
+       }
+     }
+    }
+    let table = document.querySelector("table");
+    let data = Object.keys(employees[0]); //Recoge los datos del  array
+    table.setAttribute("border","2");
+    generarThead(table, data);
+    generarTabla(table, employees);
+    table.style.border = "2px red";
+    table.style.display = "flex";
+    table.style.justifyContent = "center";
+    </script>
+
+
+  </body>
+</html>
